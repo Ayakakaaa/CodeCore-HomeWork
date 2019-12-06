@@ -14,7 +14,6 @@ const csvSolution = () => {
 }
 
 const boxIt2 = (str) =>{
-//   create 2 dimentional array
 let a = str.split("\n");
 let arrS = [];
 for (i=0; i<a.length; i++){
@@ -39,8 +38,6 @@ for (let i=0; i<columns; i++) {
     columnLengths.push(max);
 }
 
-// we will use this pattern 3 times so save it as a function
-// the code is getting long so this will help clean it up and keep it legible 
 const createLine = (beginning, middle, end) => {
   let str = beginning; 
   for (let i=0; i<columnLengths.length; i++) {
@@ -78,15 +75,11 @@ for (index in arrS){
 return first + result + last ;
 };
 
-// First check to see if we should process for a csv or not
 const args = process.argv.slice(2);
-// If there's no argument return an error
 if (args.length < 1) return console.log("please add a csv file");
-// if the first argument has .csv in it, then run it like a csv file
 if (args.length < 2 && args[0].includes(".csv")) {
   csvSolution();
 }
-// otherwise run it like the normal one
 else {
   // turn the arguments into a single string (csv format)
   let str = args.join("\n");
