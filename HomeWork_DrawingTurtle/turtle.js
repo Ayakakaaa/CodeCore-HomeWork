@@ -133,7 +133,6 @@ else if(args.length === 1  && typeof args[0] === "string" ){
     turtle.print();
 }
 
-
 else{
     console.log(`
                              ___-------___
@@ -188,4 +187,4 @@ function takeFromNode (str){
         }
     }
     return myTurtle;
-}
+};
