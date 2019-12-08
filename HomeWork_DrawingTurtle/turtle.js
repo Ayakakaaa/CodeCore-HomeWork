@@ -1,4 +1,3 @@
-
 class Turtle{
     constructor(x,y){
         this.x = x;
@@ -44,9 +43,10 @@ class Turtle{
     }
 
     left(){
-        this.right();
-        this.right();
-        this.right();
+        if (this.direction <= 0) {
+            this.direction = 3;
+        }
+        else this.direction--;
         return this;
     }
 
@@ -54,7 +54,7 @@ class Turtle{
         return this.steps;
     }
 
-    print(){
+    printToString() {
         // get min/max values so we know how big of a map to print
         let maxX = 0;
         let maxY = 0;
@@ -75,8 +75,7 @@ class Turtle{
             }
         }
 
-        // we will use this function many times to see if
-        // a set of coordinates are in the array
+        // to see if a set of coordinates are in the array
         const coordExists = (x, y) => {
             for(let step of this.steps) {
                 if (step[0] === x && step[1] === y) return true;
@@ -84,36 +83,57 @@ class Turtle{
             return false;
         }
 
+        let result =[];
         // start going through every coordinate
         for(let y=minY; y<=maxY; y++) {
             // print each line
             let line = "";
             for(let x=minX; x<=maxX; x++) {
                 if(coordExists(x, y)) {
-                    line += "🐢";
+                    line += "◼";
                 }
                 else {
-                    line += "∶";
+                    line += "◻";
                 }
             }
-            console.log(line);
+           result.push(line);
         }
+        // this stretch requirement needs us to return a string of the results.
+        // if you need to console log normally then use the standard turtle.js file.
+        return result.join("\n")
+    }
+
+    print(){
+        console.log(this.printToString());
         return this;
     }
 }
-//print!!
-// const flash = new Turtle(0, 0).forward(8).left().forward(3);
-// console.log(flash.allPoints());
-// flash.print();
 
+// include the libary
+const fs = require('fs');
+const args = process.argv.slice(2);
 
-// <first Stretch>
-// $ node turtle.js t5,5-f10-r-f5-r-f10-r-f5-r-f2-r-f5-l-f2-l-f
-
-const argv = process.argv[2];
-if(typeof argv === "string"){
-    takeFromNode(argv)
+if(args.length >= 2 && args[0].includes("--output")){
+    let arr = args[0].split("=")
+    let newFileName = arr[1];
+    // process commands
+    let turtle = takeFromNode(args[1]);
+    // write the file
+    const val = turtle.printToString();
+    fs.writeFile(newFileName, val, err => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        console.log(`🐢 Drawing written to ${newFileName}`);
+    })
 }
+else if(args.length === 1  && typeof args[0] === "string" ){
+    let turtle = takeFromNode(args[0]);
+    turtle.print();
+}
+
+
 else{
     console.log(`
                              ___-------___
@@ -132,20 +152,21 @@ else{
       (_(__/  ./     /                    \\_\\      \.
               (_(___/                         \\_____)_)
 
-              TYPE YOUR ORDER!!!!
+              TYPE YOUR ORDER!!!!  OR 
 tX,Y for new Turtle where X & Y are numbers representing the starting x & y coordinates. If this command is not given, begin the turtle at (0, 0).
 fN for forward where N is a number representing how many units the turtle moves forward.
 r for right
 l for left
 
-Ex. $ node turtle.js t5,5-f10-r-f5-r-f10-r-f5-r-f2-r-f5-l-f2-l-f
+Ex. $ node turtle.js t5,5-f10-r-f5-r-f10-r-f5-r-f2-r-f5-l-f2-l-f  OR
+
+Save a file
+EX. $ node --output=drawing.txt f10-r-f10-r-f10-r-f10
 `);
-
-
 }
 
 function takeFromNode (str){
-    const order = argv.split("-");
+    const order = str.split("-");
     let myTurtle;
     if (order[0][0] === "t") {
         const constructor = order.shift().substr(1);
@@ -166,5 +187,5 @@ function takeFromNode (str){
             myTurtle.forward(num);
         }
     }
-    myTurtle.print();
+    return myTurtle;
 }
