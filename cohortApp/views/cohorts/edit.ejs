@@ -1,0 +1,23 @@
+<%- include("./partials/header") %>
+<form method="POST" action="/cohorts/<%= cohort.id %>/edit">
+    <div class="form-group">
+      <label for="logoUrl">LOGO URL</label>
+      <input type="text" class="form-control" id="lodoUrl" name="logoUrl" placeholder="e.g. http://www.example.com/some.png" value="<%= cohort.logoUrl %>">
+    </div>
+
+    <div class="form-group">
+        <label for="newName">NAME</label>
+        <input type="text" class="form-control" id="newName" name="name" placeholder="Full Name" value="<%= cohort.name %>">
+    </div>
+    
+    <div class="form-group">
+      <label for="newMembers">MEMBERS</label>
+      <textarea class="form-control" id="newMembers" rows="3" name="members" placeholder="Ayaka, Gabriel, Caleb, Jeames...etc"><%= cohort.members %></textarea>
+    </div>
+    <br>
+    <br>
+    <button type="submit">Submit</button>
+  </form>
+
+
+<%- include("./partials/footer") %>

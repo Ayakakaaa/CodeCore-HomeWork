@@ -1,0 +1,23 @@
+<%- include("./partials/header") %>
+<form method="POST" action="/cohorts/new">
+    <div class="form-group">
+      <label for="newUrl">LOGO URL</label>
+      <input type="text" class="form-control" id="newUrl" name="logoUrl" placeholder="e.g. http://www.example.com/some.png">
+    </div>
+
+    <div class="form-group">
+        <label for="newName">NAME</label>
+        <input type="text" class="form-control" id="newName" name="name" placeholder="Full Name">
+    </div>
+    
+    <div class="form-group">
+      <label for="newMembers">MEMBERS</label>
+      <textarea class="form-control" id="newMembers" rows="3" name="members" placeholder="Ayaka, Gabriel, Caleb, Jeames...etc"></textarea>
+    </div>
+    <br>
+    <br>
+    <button type="submit">Submit</button>
+  </form>
+
+
+<%- include("./partials/footer") %>
