@@ -1,0 +1,15 @@
+<%- include("./partials/header") %>
+<h3>There are <%= cohorts.length %> cohorts</h3>
+<% for (cohort of cohorts) { %>
+    <div class="media">
+        <img class="d-flex mr-3" style="border-radius:50%; width: 64px; height: 64px;" src="<%= cohort.logoUrl %>" >
+        <div class="media-body">
+            <h5 class="mt-0"><%= cohort.name %></h5>
+            <p><%= cohort.members %></p>
+            <a href="/cohorts/<%= cohort.id %>">
+                <button>Show cohort</button>
+            </a>
+        </div>
+    </div>
+<% } %>
+<%- include("./partials/footer") %>

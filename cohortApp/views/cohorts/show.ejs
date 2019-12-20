@@ -1,0 +1,42 @@
+<%- include("./partials/header") %>
+<div class="media" style="display: flex; flex-direction: column;align-items: center; margin:30px auto; min-height: 100px;">
+  <img class="d-flex mr-3" style="border-radius:50%; width: 70px; height: 68px; margin: 30px;" src="<%= cohort.logoUrl %>" >
+      <div class="media-body">
+          <h5 class="mt-0"><%= cohort.name %></h5>
+          <p><%= cohort.members %></p>
+      </div>
+      <form method="GET" style="margin-top: 20px; display: flex; flex-direction: column; min-width: 50%;" action="/cohorts/<%= cohort.id %>">
+        <h3 style="margin: 15px 0;">Method</h3>
+        <div style="margin: 10px 0;">
+          <input type="radio"name="choice" id="teamCount" value="teamCount">
+          <label for="teamCount"> Team Count</label>
+        </div>
+        <div style="margin: 10px 0;">
+          <input type="radio" name="choice" id="numberPerTeam" value="numberPerTeam">
+          <label for="numberPerTeam"> Number Per a Team</label>
+        </div>
+        <div style="margin: 10px 0;">
+          <label for="quantity">Quantity</label>
+          <input type="number" name="quantity">
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Assign Team</button>
+      </form>
+
+      <div style="margin-top: 40px; min-width: 50%;">
+        <h3 style="margin: 15px 0;"># Members</h3>
+        <% for(let i=0; i<teams.length; i++) { %>
+          <ol class="list-group" style="margin:5px 0;">
+            <li class="list-group-item"><%=`${i+1}, ${teams[i]}`%></li>
+          </ol>
+        <% } %>
+      </div>
+    <div style="display: flex; flex-direction: row;">
+      <a href="/cohorts/<%= cohort.id %>/edit">
+        <button style="margin: 20px;">Edit</button>
+      </a>
+      <form method="POST" action="/cohorts/<%= cohort.id %>/delete">
+        <button type="submit" style="margin: 20px;">Delete</button>
+      </form>
+    </div>
+</div>
+<%- include("./partials/footer") %>
