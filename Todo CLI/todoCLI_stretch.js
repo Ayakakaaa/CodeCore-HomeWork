@@ -45,7 +45,7 @@ function menu (){
         else if(answer[0] === 'd') return del(answer);
         else if(answer === 'q') return quit();
         else if(answer === `s`) return save();
-        else return console.log(`no option for that :(`);
+        else return console.log(`no option for that :(`)
     });
 };
 
@@ -71,7 +71,7 @@ function complete (answer) {
     //string to number
     let num = parseInt(answer.substr(1));
     //check the box
-    lists[num] = lists[num].replace("[ ]", "[✓]")
+    lists[num] = lists[num].replace("[ ]","[✓]")
     console.log(`Completed "${lists[num].substr(4)}"`)
     return menu();
 }
@@ -118,7 +118,6 @@ function save(){
         }
     });
 }
-
 
 function quit () {
     console.log(`See you soon!`);
