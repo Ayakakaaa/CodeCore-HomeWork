@@ -15,7 +15,10 @@ function menu (){
         else if(answer.includes('c')) return complete(answer);
         else if(answer[0] === 'd') return del(answer);
         else if(answer === 'q') return quit();
-        else return console.log(`no option for that :(`);
+        else {
+            console.log(`no option for that :(`);
+            return menu();
+        }
     });
 };
 
@@ -44,16 +47,26 @@ function complete (answer) {
     //string to number
     let num = parseInt(answer.substr(1));
     //check the box
-    lists[num] = lists[num].replace("[ ]", "[✓]")
-    console.log(`Completed "${lists[num].substr(3)}"`)
+    if(num < lists.length){
+        lists[num] = lists[num].replace("[ ]","[✓]")
+        console.log(`Completed "${lists[num].substr(4)}"`)
+    }
+    else {
+        console.error("incorrect number");
+    }
     return menu();
 }
    
 //delete function
 function del (answer) {
     let num = parseInt(answer.substr(1));
-            console.log(`Deleted ${lists[num]}\n`);
+    if(num < lists.length){
+            console.log(`Deleted ${lists[num].substr(4)}\n`);
             lists.splice(num, 1);
+    }
+    else {
+        console.error("incorrect number");
+    }
     return menu();
 };
 

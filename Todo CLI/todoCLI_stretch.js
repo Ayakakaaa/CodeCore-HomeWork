@@ -45,7 +45,10 @@ function menu (){
         else if(answer[0] === 'd') return del(answer);
         else if(answer === 'q') return quit();
         else if(answer === `s`) return save();
-        else return console.log(`no option for that :(`)
+        else {
+            console.log(`no option for that :(`)
+            return menu();
+        }
     });
 };
 
@@ -71,16 +74,26 @@ function complete (answer) {
     //string to number
     let num = parseInt(answer.substr(1));
     //check the box
-    lists[num] = lists[num].replace("[ ]","[✓]")
-    console.log(`Completed "${lists[num].substr(4)}"`)
+    if(num < lists.length){
+        lists[num] = lists[num].replace("[ ]","[✓]")
+        console.log(`Completed "${lists[num].substr(4)}"`)
+    }
+    else {
+        console.error("incorrect number");
+    }
     return menu();
 }
    
 //delete function
 function del (answer) {
     let num = parseInt(answer.substr(1));
+    if(num < lists.length){
             console.log(`Deleted ${lists[num].substr(4)}\n`);
             lists.splice(num, 1);
+    }
+    else {
+        console.error("incorrect number");
+    }
     return menu();
 };
 
@@ -105,17 +118,19 @@ function save(){
             fs.writeFile(answer, json, err => {
                 if (err) {
                     console.error(err);
-                    return;
                 }
                 else if(result.length < 0){
                     console.log(`I don't have any list`);
-                    return menu();
                 }
                 else{
                     console.log(`List saved to "${answer}" `);
                 }
             });
         }
+        else {
+            console.error("file name taken");
+        }
+        return menu();
     });
 }
 
