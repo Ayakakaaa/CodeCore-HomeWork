@@ -1,0 +1,93 @@
+@import url(reset.css);
+
+html {
+    box-sizing: border-box;
+}
+
+*,*:before,*:after {
+    box-sizing: inherit;
+}
+body{
+    padding: 0.5em 1.7em 0.5em 1em;
+}
+article{
+    display: grid;
+    grid-gap: 0.1em;
+    grid-template-rows: 33% 33% 33%; 
+    grid-template-columns: repeat(10,10%);
+    margin: o auto;
+}
+h1{
+    margin-bottom: 1em;
+    font-weight: 700;
+}
+
+button {
+    object-fit: cover;
+    border: 1px solid #eee;
+    border-radius: 0.3em;
+    background: white;
+    padding: 0.3em 0.4em;
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.click {
+    border: 0.2em solid rgb(131, 27, 1);
+    border-radius: 0.3em;
+	background: rgb(231, 52, 52);
+	color: #EFEFEF; 
+}
+
+.answerBox{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 2em 0;
+}
+.answer{
+    border-bottom: 2px solid black;
+    display: flex;
+    margin: 10px;
+    width: 35px;
+    height: 35px;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: 1em;
+    font-weight: 700;
+}
+.moji{
+    font-size: 2.3em;
+    font-weight: 600;
+    margin-bottom: 0em;
+}
+.imgBox{
+  text-align: center;
+}
+
+
+
+
+/* Destkop Styles Last */
+@media (min-width: 600px) {
+    body {
+        padding: 1em 2.5em 1em 1.5em;
+    }
+
+    button {
+        padding: 0.5em 1.2em;
+        font-size: 1.2em;
+        font-weight: 700;
+        margin: 0.1em;
+    }
+
+    .answer{
+        width: 70px;
+        height: 70px;
+    }
+    .moji{
+        font-size: 3em;
+        font-weight: 700;
+    }
+    
+}
