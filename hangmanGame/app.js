@@ -66,12 +66,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         return true;
     };
+    // win sound
+    const winSound = new Audio("styles/win.wav");
+    //lose sound
+    const loseSound = new Audio("styles/loose.wav");
+
 
 
     function checkAnswer(letter,answer){
         if(check(letter, answer)){
             makeVisible(letter);
             if(check_win()){
+                winSound.play();
                 setTimeout(function(){
                     alert('Congratulations!You won ;)');
                     location.reload();
@@ -89,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const img = document.querySelector('img');
             img.src = pathArr[lose];
             if(lose >= 5){
+                loseSound.play();
                 setTimeout(function(){
                     alert('Better luck next time.. :(')
                     location.reload();
